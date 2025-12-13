@@ -11,7 +11,6 @@ export const metadata: Metadata = {
   title: "ReliefTrack - Disaster Relief Distribution System",
   description:
     "Community Disaster Relief Distribution Management System for fair and transparent distribution of relief goods during emergencies. Supporting UN SDG 1 (No Poverty) and SDG 2 (Zero Hunger).",
-  generator: "v0.app",
   keywords: [
     "disaster relief",
     "relief distribution",
