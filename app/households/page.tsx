@@ -1,7 +1,7 @@
 "use client"
 
 import { useState, useEffect } from "react"
-import { Users, Plus, Pencil, Trash2, Search, MapPin } from "lucide-react"
+import { Users, Plus, Pencil, Trash2, Search, MapPin, UserCheck, Home } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
 import { Input } from "@/components/ui/input"
@@ -215,20 +215,23 @@ export default function HouseholdsPage() {
   const puroks = Array.from(new Set(households.map((h) => h.purok))).sort()
 
   return (
-    <div className="min-h-screen bg-background">
-      {/* Header */}
-      <header className="border-b bg-card">
+    <div className="min-h-screen bg-gradient-to-br from-background via-secondary/5 to-background">
+      <header className="border-b bg-gradient-to-r from-card via-secondary/10 to-card backdrop-blur-sm">
         <div className="container mx-auto px-4 py-4">
           <div className="flex items-center justify-between">
             <div className="flex items-center gap-3">
-              <div className="flex h-10 w-10 items-center justify-center rounded-lg bg-primary text-primary-foreground">
-                <Users className="h-5 w-5" />
+              <div className="flex h-12 w-12 items-center justify-center rounded-xl bg-gradient-to-br from-secondary to-secondary/70 text-secondary-foreground shadow-lg shadow-secondary/20 ring-2 ring-secondary/20">
+                <Users className="h-6 w-6" />
               </div>
               <div>
-                <h1 className="text-xl font-semibold">ReliefTrack</h1>
-                <p className="text-xs text-muted-foreground">Disaster Relief Distribution System</p>
+                <h1 className="text-xl font-bold">ReliefTrack</h1>
+                <p className="text-xs text-muted-foreground">Household Registry</p>
               </div>
             </div>
+            <Badge className="gap-2 bg-secondary/20 text-secondary-foreground border-secondary">
+              <UserCheck className="h-3 w-3" />
+              Registration System
+            </Badge>
           </div>
         </div>
       </header>
@@ -261,24 +264,74 @@ export default function HouseholdsPage() {
         </div>
       </nav>
 
-      {/* Main Content */}
       <main className="container mx-auto px-4 py-8">
-        <Card>
-          <CardHeader>
+        {/* Statistics */}
+        <div className="mb-6 grid gap-4 sm:grid-cols-3">
+          <Card className="overflow-hidden border-2 border-secondary/20 bg-gradient-to-br from-secondary/10 to-transparent">
+            <CardContent className="pt-6">
+              <div className="flex items-center justify-between">
+                <div>
+                  <div className="text-3xl font-bold text-secondary">{filteredHouseholds.length}</div>
+                  <p className="text-sm font-medium text-muted-foreground">
+                    {purokFilter === "all" ? "Total Households" : `Households in ${purokFilter}`}
+                  </p>
+                </div>
+                <div className="flex h-14 w-14 items-center justify-center rounded-full bg-secondary/20">
+                  <Home className="h-7 w-7 text-secondary" />
+                </div>
+              </div>
+            </CardContent>
+          </Card>
+          <Card className="overflow-hidden border-2 border-primary/20 bg-gradient-to-br from-primary/10 to-transparent">
+            <CardContent className="pt-6">
+              <div className="flex items-center justify-between">
+                <div>
+                  <div className="text-3xl font-bold text-primary">
+                    {filteredHouseholds.reduce((sum, h) => sum + h.family_members, 0)}
+                  </div>
+                  <p className="text-sm font-medium text-muted-foreground">Total Family Members</p>
+                </div>
+                <div className="flex h-14 w-14 items-center justify-center rounded-full bg-primary/20">
+                  <Users className="h-7 w-7 text-primary" />
+                </div>
+              </div>
+            </CardContent>
+          </Card>
+          <Card className="overflow-hidden border-2 border-accent/20 bg-gradient-to-br from-accent/10 to-transparent">
+            <CardContent className="pt-6">
+              <div className="flex items-center justify-between">
+                <div>
+                  <div className="text-3xl font-bold text-accent-foreground">{puroks.length}</div>
+                  <p className="text-sm font-medium text-muted-foreground">Active Puroks</p>
+                </div>
+                <div className="flex h-14 w-14 items-center justify-center rounded-full bg-accent/20">
+                  <MapPin className="h-7 w-7 text-accent-foreground" />
+                </div>
+              </div>
+            </CardContent>
+          </Card>
+        </div>
+
+        <Card className="overflow-hidden border-2 shadow-xl">
+          <CardHeader className="bg-gradient-to-r from-secondary/10 via-transparent to-secondary/10">
             <div className="flex items-center justify-between">
               <div>
-                <CardTitle>Household Registration & Validation</CardTitle>
-                <CardDescription>
+                <CardTitle className="text-2xl">Household Registration & Validation</CardTitle>
+                <CardDescription className="text-base">
                   Register households with unique identifiers and prevent duplicate distribution
                 </CardDescription>
               </div>
-              <Button onClick={() => setIsAddDialogOpen(true)}>
-                <Plus className="mr-2 h-4 w-4" />
+              <Button
+                onClick={() => setIsAddDialogOpen(true)}
+                className="gap-2 bg-gradient-to-r from-secondary to-secondary/80 shadow-lg shadow-secondary/30 hover:shadow-xl hover:shadow-secondary/40"
+                size="lg"
+              >
+                <Plus className="h-5 w-5" />
                 Register Household
               </Button>
             </div>
           </CardHeader>
-          <CardContent>
+          <CardContent className="pt-6">
             {/* Filters */}
             <div className="mb-6 flex flex-col gap-4 sm:flex-row">
               <div className="relative flex-1">
@@ -287,11 +340,11 @@ export default function HouseholdsPage() {
                   placeholder="Search by household number or head of family..."
                   value={searchQuery}
                   onChange={(e) => setSearchQuery(e.target.value)}
-                  className="pl-9"
+                  className="pl-9 border-2 focus:border-secondary"
                 />
               </div>
               <Select value={purokFilter} onValueChange={setPurokFilter}>
-                <SelectTrigger className="w-full sm:w-[200px]">
+                <SelectTrigger className="w-full border-2 sm:w-[200px]">
                   <SelectValue placeholder="Filter by purok" />
                 </SelectTrigger>
                 <SelectContent>
@@ -305,81 +358,76 @@ export default function HouseholdsPage() {
               </Select>
             </div>
 
-            {/* Statistics */}
-            <div className="mb-6 grid gap-4 sm:grid-cols-3">
-              <Card>
-                <CardContent className="pt-6">
-                  <div className="text-2xl font-bold">{filteredHouseholds.length}</div>
-                  <p className="text-sm text-muted-foreground">
-                    {purokFilter === "all" ? "Total Households" : `Households in ${purokFilter}`}
-                  </p>
-                </CardContent>
-              </Card>
-              <Card>
-                <CardContent className="pt-6">
-                  <div className="text-2xl font-bold">
-                    {filteredHouseholds.reduce((sum, h) => sum + h.family_members, 0)}
-                  </div>
-                  <p className="text-sm text-muted-foreground">Total Family Members</p>
-                </CardContent>
-              </Card>
-              <Card>
-                <CardContent className="pt-6">
-                  <div className="text-2xl font-bold">{puroks.length}</div>
-                  <p className="text-sm text-muted-foreground">Active Puroks</p>
-                </CardContent>
-              </Card>
-            </div>
-
             {/* Household Table */}
-            <div className="rounded-md border">
+            <div className="rounded-lg border-2 overflow-hidden">
               <Table>
                 <TableHeader>
-                  <TableRow>
-                    <TableHead>Household Number</TableHead>
-                    <TableHead>Head of Family</TableHead>
-                    <TableHead>Purok</TableHead>
-                    <TableHead>Family Members</TableHead>
-                    <TableHead>Contact</TableHead>
-                    <TableHead className="text-right">Actions</TableHead>
+                  <TableRow className="bg-secondary/10">
+                    <TableHead className="font-bold">Household Number</TableHead>
+                    <TableHead className="font-bold">Head of Family</TableHead>
+                    <TableHead className="font-bold">Purok</TableHead>
+                    <TableHead className="font-bold">Family Members</TableHead>
+                    <TableHead className="font-bold">Contact</TableHead>
+                    <TableHead className="text-right font-bold">Actions</TableHead>
                   </TableRow>
                 </TableHeader>
                 <TableBody>
                   {isLoading ? (
                     <TableRow>
-                      <TableCell colSpan={6} className="text-center">
-                        Loading...
+                      <TableCell colSpan={6} className="text-center py-12">
+                        <div className="flex items-center justify-center gap-2">
+                          <div className="h-4 w-4 animate-spin rounded-full border-2 border-secondary border-t-transparent" />
+                          Loading...
+                        </div>
                       </TableCell>
                     </TableRow>
                   ) : filteredHouseholds.length === 0 ? (
                     <TableRow>
-                      <TableCell colSpan={6} className="text-center">
+                      <TableCell colSpan={6} className="text-center py-12">
                         No households found
                       </TableCell>
                     </TableRow>
                   ) : (
                     filteredHouseholds.map((household) => (
-                      <TableRow key={household.id}>
-                        <TableCell className="font-medium">
-                          <Badge variant="outline">{household.household_number}</Badge>
+                      <TableRow key={household.id} className="hover:bg-secondary/5">
+                        <TableCell className="font-semibold">
+                          <Badge variant="outline" className="font-mono font-bold border-2">
+                            {household.household_number}
+                          </Badge>
                         </TableCell>
-                        <TableCell>{household.head_of_family}</TableCell>
+                        <TableCell className="font-medium">{household.head_of_family}</TableCell>
                         <TableCell>
-                          <div className="flex items-center gap-1">
-                            <MapPin className="h-3 w-3" />
-                            {household.purok}
+                          <div className="flex items-center gap-2">
+                            <div className="flex h-8 w-8 items-center justify-center rounded-full bg-secondary/20">
+                              <MapPin className="h-4 w-4 text-secondary" />
+                            </div>
+                            <span className="font-medium">{household.purok}</span>
                           </div>
                         </TableCell>
-                        <TableCell>{household.family_members}</TableCell>
+                        <TableCell>
+                          <Badge className="bg-primary/20 text-primary-foreground border-primary/30">
+                            {household.family_members} members
+                          </Badge>
+                        </TableCell>
                         <TableCell className="text-sm text-muted-foreground">
                           {household.contact_number || "N/A"}
                         </TableCell>
                         <TableCell className="text-right">
                           <div className="flex justify-end gap-2">
-                            <Button variant="ghost" size="icon" onClick={() => openEditDialog(household)}>
+                            <Button
+                              variant="ghost"
+                              size="icon"
+                              onClick={() => openEditDialog(household)}
+                              className="hover:bg-secondary/20 hover:text-secondary"
+                            >
                               <Pencil className="h-4 w-4" />
                             </Button>
-                            <Button variant="ghost" size="icon" onClick={() => handleDelete(household.id)}>
+                            <Button
+                              variant="ghost"
+                              size="icon"
+                              onClick={() => handleDelete(household.id)}
+                              className="hover:bg-destructive/10 hover:text-destructive"
+                            >
                               <Trash2 className="h-4 w-4" />
                             </Button>
                           </div>

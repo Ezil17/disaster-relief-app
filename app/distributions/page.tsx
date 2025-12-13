@@ -1,7 +1,7 @@
 "use client"
 
 import { useState, useEffect } from "react"
-import { TrendingUp, Plus, Search, Calendar } from "lucide-react"
+import { TrendingUp, Plus, Search, Calendar, Package } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
 import { Input } from "@/components/ui/input"
@@ -208,20 +208,23 @@ export default function DistributionsPage() {
   const puroks = Array.from(new Set(households.map((h) => h.purok))).sort()
 
   return (
-    <div className="min-h-screen bg-background">
-      {/* Header */}
-      <header className="border-b bg-card">
+    <div className="min-h-screen bg-gradient-to-br from-background via-accent/5 to-background">
+      <header className="border-b bg-gradient-to-r from-card via-accent/10 to-card backdrop-blur-sm">
         <div className="container mx-auto px-4 py-4">
           <div className="flex items-center justify-between">
             <div className="flex items-center gap-3">
-              <div className="flex h-10 w-10 items-center justify-center rounded-lg bg-primary text-primary-foreground">
-                <TrendingUp className="h-5 w-5" />
+              <div className="flex h-12 w-12 items-center justify-center rounded-xl bg-gradient-to-br from-accent to-accent/70 shadow-lg shadow-accent/20 ring-2 ring-accent/20">
+                <TrendingUp className="h-6 w-6 text-accent-foreground" />
               </div>
               <div>
-                <h1 className="text-xl font-semibold">ReliefTrack</h1>
-                <p className="text-xs text-muted-foreground">Disaster Relief Distribution System</p>
+                <h1 className="text-xl font-bold">ReliefTrack</h1>
+                <p className="text-xs text-muted-foreground">Distribution Tracking</p>
               </div>
             </div>
+            <Badge className="gap-2 bg-accent/20 text-accent-foreground border-accent">
+              <TrendingUp className="h-3 w-3" />
+              Live Distribution
+            </Badge>
           </div>
         </div>
       </header>
@@ -254,22 +257,27 @@ export default function DistributionsPage() {
         </div>
       </nav>
 
-      {/* Main Content */}
       <main className="container mx-auto px-4 py-8">
-        <Card>
-          <CardHeader>
+        <Card className="overflow-hidden border-2 shadow-xl">
+          <CardHeader className="bg-gradient-to-r from-accent/10 via-transparent to-accent/10">
             <div className="flex items-center justify-between">
               <div>
-                <CardTitle>Distribution Tracking</CardTitle>
-                <CardDescription>Record and monitor relief goods distribution to households</CardDescription>
+                <CardTitle className="text-2xl">Distribution Tracking</CardTitle>
+                <CardDescription className="text-base">
+                  Record and monitor relief goods distribution to households
+                </CardDescription>
               </div>
-              <Button onClick={() => setIsAddDialogOpen(true)}>
-                <Plus className="mr-2 h-4 w-4" />
+              <Button
+                onClick={() => setIsAddDialogOpen(true)}
+                className="gap-2 bg-gradient-to-r from-accent to-accent/80 shadow-lg shadow-accent/30 hover:shadow-xl hover:shadow-accent/40"
+                size="lg"
+              >
+                <Plus className="h-5 w-5" />
                 Record Distribution
               </Button>
             </div>
           </CardHeader>
-          <CardContent>
+          <CardContent className="pt-6">
             {/* Filters */}
             <div className="mb-6 flex flex-col gap-4 sm:flex-row">
               <div className="relative flex-1">
@@ -278,11 +286,11 @@ export default function DistributionsPage() {
                   placeholder="Search by household or item..."
                   value={searchQuery}
                   onChange={(e) => setSearchQuery(e.target.value)}
-                  className="pl-9"
+                  className="pl-9 border-2 focus:border-accent"
                 />
               </div>
               <Select value={purokFilter} onValueChange={setPurokFilter}>
-                <SelectTrigger className="w-full sm:w-[200px]">
+                <SelectTrigger className="w-full border-2 sm:w-[200px]">
                   <SelectValue placeholder="Filter by purok" />
                 </SelectTrigger>
                 <SelectContent>
@@ -297,63 +305,79 @@ export default function DistributionsPage() {
             </div>
 
             {/* Distribution Table */}
-            <div className="rounded-md border">
+            <div className="rounded-lg border-2 overflow-hidden">
               <Table>
                 <TableHeader>
-                  <TableRow>
-                    <TableHead>Date</TableHead>
-                    <TableHead>Household</TableHead>
-                    <TableHead>Purok</TableHead>
-                    <TableHead>Item Distributed</TableHead>
-                    <TableHead>Quantity</TableHead>
-                    <TableHead>Distributed By</TableHead>
+                  <TableRow className="bg-accent/10">
+                    <TableHead className="font-bold">Date</TableHead>
+                    <TableHead className="font-bold">Household</TableHead>
+                    <TableHead className="font-bold">Purok</TableHead>
+                    <TableHead className="font-bold">Item Distributed</TableHead>
+                    <TableHead className="font-bold">Quantity</TableHead>
+                    <TableHead className="font-bold">Distributed By</TableHead>
                   </TableRow>
                 </TableHeader>
                 <TableBody>
                   {isLoading ? (
                     <TableRow>
-                      <TableCell colSpan={6} className="text-center">
-                        Loading...
+                      <TableCell colSpan={6} className="text-center py-12">
+                        <div className="flex items-center justify-center gap-2">
+                          <div className="h-4 w-4 animate-spin rounded-full border-2 border-accent border-t-transparent" />
+                          Loading...
+                        </div>
                       </TableCell>
                     </TableRow>
                   ) : filteredDistributions.length === 0 ? (
                     <TableRow>
-                      <TableCell colSpan={6} className="text-center">
+                      <TableCell colSpan={6} className="text-center py-12">
                         No distributions found
                       </TableCell>
                     </TableRow>
                   ) : (
                     filteredDistributions.map((distribution) => (
-                      <TableRow key={distribution.id}>
+                      <TableRow key={distribution.id} className="hover:bg-accent/5">
                         <TableCell className="font-medium">
-                          <div className="flex items-center gap-1 text-sm">
-                            <Calendar className="h-3 w-3" />
-                            {new Date(distribution.distributed_at).toLocaleDateString()}
+                          <div className="flex items-center gap-2">
+                            <div className="flex h-8 w-8 items-center justify-center rounded-full bg-accent/20">
+                              <Calendar className="h-4 w-4 text-accent-foreground" />
+                            </div>
+                            <span className="text-sm">
+                              {new Date(distribution.distributed_at).toLocaleDateString()}
+                            </span>
                           </div>
                         </TableCell>
                         <TableCell>
                           <div>
-                            <div className="font-medium">{distribution.household?.head_of_family}</div>
-                            <div className="text-sm text-muted-foreground">
+                            <div className="font-semibold">{distribution.household?.head_of_family}</div>
+                            <div className="text-xs text-muted-foreground font-mono">
                               {distribution.household?.household_number}
                             </div>
                           </div>
                         </TableCell>
                         <TableCell>
-                          <Badge variant="outline">{distribution.household?.purok}</Badge>
+                          <Badge variant="outline" className="font-medium border-2">
+                            {distribution.household?.purok}
+                          </Badge>
                         </TableCell>
                         <TableCell>
-                          <div>
-                            <div className="font-medium">{distribution.inventory?.item_name}</div>
-                            <div className="text-sm text-muted-foreground">
-                              {distribution.inventory?.category.replace("_", " ")}
+                          <div className="flex items-center gap-2">
+                            <div className="flex h-8 w-8 items-center justify-center rounded-full bg-primary/20">
+                              <Package className="h-4 w-4 text-primary" />
+                            </div>
+                            <div>
+                              <div className="font-semibold">{distribution.inventory?.item_name}</div>
+                              <div className="text-xs text-muted-foreground">
+                                {distribution.inventory?.category.replace("_", " ")}
+                              </div>
                             </div>
                           </div>
                         </TableCell>
                         <TableCell>
-                          {distribution.quantity_distributed} {distribution.inventory?.unit}
+                          <Badge className="bg-secondary/20 text-secondary-foreground border-secondary/30 font-bold">
+                            {distribution.quantity_distributed} {distribution.inventory?.unit}
+                          </Badge>
                         </TableCell>
-                        <TableCell className="text-sm">{distribution.distributed_by}</TableCell>
+                        <TableCell className="text-sm font-medium">{distribution.distributed_by}</TableCell>
                       </TableRow>
                     ))
                   )}

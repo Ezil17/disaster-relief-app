@@ -4,83 +4,85 @@
 @custom-variant dark (&:is(.dark *));
 
 :root {
-  --background: oklch(0.99 0 0);
-  --foreground: oklch(0.2 0.01 240);
+  --background: oklch(0.99 0.005 270);
+  --foreground: oklch(0.15 0.02 280);
   --card: oklch(1 0 0);
-  --card-foreground: oklch(0.2 0.01 240);
+  --card-foreground: oklch(0.15 0.02 280);
   --popover: oklch(1 0 0);
-  --popover-foreground: oklch(0.2 0.01 240);
-  /* Primary: Vibrant trustworthy blue - more saturated for attraction */
-  --primary: oklch(0.5 0.2 240);
-  --primary-foreground: oklch(0.99 0 0);
-  /* Secondary: Bright compassionate teal - eye-catching */
-  --secondary: oklch(0.58 0.16 185);
-  --secondary-foreground: oklch(0.99 0 0);
-  --muted: oklch(0.96 0.005 240);
-  --muted-foreground: oklch(0.5 0.01 240);
-  /* Accent: Warm energetic orange - attention-grabbing */
-  --accent: oklch(0.68 0.2 50);
-  --accent-foreground: oklch(0.99 0 0);
-  /* Destructive: Bold red for critical alerts */
-  --destructive: oklch(0.55 0.25 25);
-  --destructive-foreground: oklch(0.99 0 0);
-  --border: oklch(0.9 0.005 240);
-  --input: oklch(0.9 0.005 240);
-  --ring: oklch(0.5 0.2 240);
-  /* Updated chart colors - vibrant and distinct */
-  --chart-1: oklch(0.58 0.16 185);
-  --chart-2: oklch(0.5 0.2 240);
-  --chart-3: oklch(0.68 0.2 50);
-  --chart-4: oklch(0.6 0.18 155);
-  --chart-5: oklch(0.55 0.25 25);
-  --radius: 0.5rem;
-  --sidebar: oklch(0.98 0.005 240);
-  --sidebar-foreground: oklch(0.2 0.01 240);
-  --sidebar-primary: oklch(0.5 0.2 240);
-  --sidebar-primary-foreground: oklch(0.99 0 0);
-  --sidebar-accent: oklch(0.94 0.005 240);
-  --sidebar-accent-foreground: oklch(0.2 0.01 240);
-  --sidebar-border: oklch(0.9 0.005 240);
-  --sidebar-ring: oklch(0.7 0.01 240);
+  --popover-foreground: oklch(0.15 0.02 280);
+
+  /* Vibrant humanitarian color palette - eye-catching yet professional */
+  --primary: oklch(0.55 0.24 240); /* Vibrant blue - trust and action */
+  --primary-foreground: oklch(0.99 0.005 270);
+  --secondary: oklch(0.7 0.22 35); /* Bright coral - compassion and warmth */
+  --secondary-foreground: oklch(0.99 0.005 270);
+  --muted: oklch(0.96 0.01 260);
+  --muted-foreground: oklch(0.48 0.02 260);
+  --accent: oklch(0.75 0.18 155); /* Fresh teal/green - hope and growth */
+  --accent-foreground: oklch(0.15 0.02 280);
+  --destructive: oklch(0.58 0.22 20);
+  --destructive-foreground: oklch(0.99 0.005 270);
+
+  --border: oklch(0.9 0.01 260);
+  --input: oklch(0.9 0.01 260);
+  --ring: oklch(0.55 0.24 240);
+
+  --chart-1: oklch(0.55 0.24 240);
+  --chart-2: oklch(0.7 0.22 35);
+  --chart-3: oklch(0.75 0.18 155);
+  --chart-4: oklch(0.65 0.2 280);
+  --chart-5: oklch(0.72 0.24 50);
+
+  --radius: 1rem;
+
+  --sidebar: oklch(0.99 0.005 270);
+  --sidebar-foreground: oklch(0.15 0.02 280);
+  --sidebar-primary: oklch(0.55 0.24 240);
+  --sidebar-primary-foreground: oklch(0.99 0.005 270);
+  --sidebar-accent: oklch(0.94 0.01 260);
+  --sidebar-accent-foreground: oklch(0.15 0.02 280);
+  --sidebar-border: oklch(0.9 0.01 260);
+  --sidebar-ring: oklch(0.68 0.02 260);
 }
 
 .dark {
-  --background: oklch(0.15 0.01 240);
-  --foreground: oklch(0.95 0.005 240);
-  --card: oklch(0.2 0.01 240);
-  --card-foreground: oklch(0.95 0.005 240);
-  --popover: oklch(0.2 0.01 240);
-  --popover-foreground: oklch(0.95 0.005 240);
-  /* Dark mode: Bright saturated blue for high contrast */
-  --primary: oklch(0.65 0.2 240);
-  --primary-foreground: oklch(0.99 0 0);
-  /* Dark mode: Bright vibrant teal */
-  --secondary: oklch(0.68 0.18 185);
-  --secondary-foreground: oklch(0.15 0.01 240);
-  --muted: oklch(0.25 0.01 240);
-  --muted-foreground: oklch(0.65 0.01 240);
-  /* Dark mode: Bright orange accent for visibility */
-  --accent: oklch(0.72 0.18 50);
-  --accent-foreground: oklch(0.15 0.01 240);
-  /* Dark mode: Bright red for critical alerts */
-  --destructive: oklch(0.68 0.22 25);
-  --destructive-foreground: oklch(0.99 0 0);
-  --border: oklch(0.25 0.01 240);
-  --input: oklch(0.25 0.01 240);
-  --ring: oklch(0.65 0.2 240);
-  --chart-1: oklch(0.68 0.18 185);
-  --chart-2: oklch(0.65 0.2 240);
-  --chart-3: oklch(0.72 0.18 50);
-  --chart-4: oklch(0.68 0.2 155);
-  --chart-5: oklch(0.68 0.22 25);
-  --sidebar: oklch(0.18 0.01 240);
-  --sidebar-foreground: oklch(0.95 0.005 240);
-  --sidebar-primary: oklch(0.65 0.2 240);
-  --sidebar-primary-foreground: oklch(0.99 0 0);
-  --sidebar-accent: oklch(0.25 0.01 240);
-  --sidebar-accent-foreground: oklch(0.95 0.005 240);
-  --sidebar-border: oklch(0.25 0.01 240);
-  --sidebar-ring: oklch(0.4 0.01 240);
+  --background: oklch(0.13 0.02 260);
+  --foreground: oklch(0.96 0.01 260);
+  --card: oklch(0.17 0.02 260);
+  --card-foreground: oklch(0.96 0.01 260);
+  --popover: oklch(0.17 0.02 260);
+  --popover-foreground: oklch(0.96 0.01 260);
+
+  /* Dark mode with high-saturation, vibrant colors */
+  --primary: oklch(0.7 0.26 235); /* Bright electric blue */
+  --primary-foreground: oklch(0.13 0.02 260);
+  --secondary: oklch(0.75 0.24 38); /* Bright vivid coral */
+  --secondary-foreground: oklch(0.13 0.02 260);
+  --muted: oklch(0.23 0.02 260);
+  --muted-foreground: oklch(0.65 0.02 260);
+  --accent: oklch(0.8 0.2 160); /* Bright mint/teal */
+  --accent-foreground: oklch(0.13 0.02 260);
+  --destructive: oklch(0.7 0.22 20);
+  --destructive-foreground: oklch(0.99 0.005 270);
+
+  --border: oklch(0.3 0.02 260);
+  --input: oklch(0.3 0.02 260);
+  --ring: oklch(0.7 0.26 235);
+
+  --chart-1: oklch(0.7 0.26 235);
+  --chart-2: oklch(0.75 0.24 38);
+  --chart-3: oklch(0.8 0.2 160);
+  --chart-4: oklch(0.72 0.22 280);
+  --chart-5: oklch(0.76 0.26 52);
+
+  --sidebar: oklch(0.16 0.02 260);
+  --sidebar-foreground: oklch(0.96 0.01 260);
+  --sidebar-primary: oklch(0.7 0.26 235);
+  --sidebar-primary-foreground: oklch(0.13 0.02 260);
+  --sidebar-accent: oklch(0.23 0.02 260);
+  --sidebar-accent-foreground: oklch(0.96 0.01 260);
+  --sidebar-border: oklch(0.3 0.02 260);
+  --sidebar-ring: oklch(0.45 0.02 260);
 }
 
 @theme inline {

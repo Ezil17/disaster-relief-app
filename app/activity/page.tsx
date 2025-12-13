@@ -1,7 +1,7 @@
 "use client"
 
 import { useState, useEffect } from "react"
-import { Activity, Search, RefreshCw } from "lucide-react"
+import { Activity, Search, RefreshCw, Zap, Eye, Plus, Trash2 } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
 import { Input } from "@/components/ui/input"
@@ -122,23 +122,25 @@ export default function ActivityPage() {
   }
 
   return (
-    <div className="min-h-screen bg-background">
-      {/* Header */}
-      <header className="border-b bg-card">
+    <div className="min-h-screen bg-gradient-to-br from-background via-primary/5 to-secondary/5">
+      <header className="border-b bg-gradient-to-r from-card via-primary/10 to-secondary/10 backdrop-blur-sm">
         <div className="container mx-auto px-4 py-4">
           <div className="flex items-center justify-between">
             <div className="flex items-center gap-3">
-              <div className="flex h-10 w-10 items-center justify-center rounded-lg bg-primary text-primary-foreground">
-                <Activity className="h-5 w-5" />
+              <div className="flex h-12 w-12 items-center justify-center rounded-xl bg-gradient-to-br from-primary to-secondary text-primary-foreground shadow-lg ring-2 ring-primary/20 animate-pulse">
+                <Activity className="h-6 w-6" />
               </div>
               <div>
-                <h1 className="text-xl font-semibold">ReliefTrack</h1>
-                <p className="text-xs text-muted-foreground">Disaster Relief Distribution System</p>
+                <h1 className="text-xl font-bold">ReliefTrack</h1>
+                <p className="text-xs text-muted-foreground">Activity Monitor</p>
               </div>
             </div>
-            <Badge variant="outline" className="gap-1">
-              <div className="h-2 w-2 animate-pulse rounded-full bg-green-500" />
-              Live Tracking
+            <Badge
+              variant="outline"
+              className="gap-2 border-2 border-emerald-500/50 bg-emerald-50 dark:bg-emerald-950/20"
+            >
+              <div className="h-2 w-2 animate-pulse rounded-full bg-emerald-500" />
+              <span className="font-semibold text-emerald-700 dark:text-emerald-400">Live Tracking</span>
             </Badge>
           </div>
         </div>
@@ -177,21 +179,32 @@ export default function ActivityPage() {
         </div>
       </nav>
 
-      {/* Main Content */}
       <main className="container mx-auto px-4 py-8">
-        <Card>
-          <CardHeader>
+        <Card className="overflow-hidden border-2 shadow-xl">
+          <CardHeader className="bg-gradient-to-r from-primary/5 via-secondary/5 to-primary/5">
             <div className="flex items-center justify-between">
-              <div>
-                <CardTitle>Activity Log</CardTitle>
-                <CardDescription>Track all actions performed in the system in real-time</CardDescription>
+              <div className="flex items-center gap-3">
+                <div className="flex h-10 w-10 items-center justify-center rounded-full bg-primary/20">
+                  <Eye className="h-5 w-5 text-primary" />
+                </div>
+                <div>
+                  <CardTitle className="text-2xl">Activity Log</CardTitle>
+                  <CardDescription className="text-base">
+                    Track all actions performed in the system in real-time
+                  </CardDescription>
+                </div>
               </div>
-              <Button onClick={fetchLogs} variant="outline" size="icon">
+              <Button
+                onClick={fetchLogs}
+                variant="outline"
+                size="icon"
+                className="border-2 hover:bg-primary/10 bg-transparent"
+              >
                 <RefreshCw className="h-4 w-4" />
               </Button>
             </div>
           </CardHeader>
-          <CardContent>
+          <CardContent className="pt-6">
             {/* Filters */}
             <div className="mb-6 flex flex-col gap-4 lg:flex-row">
               <div className="relative flex-1">
@@ -200,11 +213,11 @@ export default function ActivityPage() {
                   placeholder="Search by entity name or user..."
                   value={searchQuery}
                   onChange={(e) => setSearchQuery(e.target.value)}
-                  className="pl-9"
+                  className="pl-9 border-2 focus:border-primary"
                 />
               </div>
               <Select value={entityFilter} onValueChange={setEntityFilter}>
-                <SelectTrigger className="w-full lg:w-[180px]">
+                <SelectTrigger className="w-full border-2 lg:w-[180px]">
                   <SelectValue placeholder="Entity type" />
                 </SelectTrigger>
                 <SelectContent>
@@ -215,7 +228,7 @@ export default function ActivityPage() {
                 </SelectContent>
               </Select>
               <Select value={actionFilter} onValueChange={setActionFilter}>
-                <SelectTrigger className="w-full lg:w-[180px]">
+                <SelectTrigger className="w-full border-2 lg:w-[180px]">
                   <SelectValue placeholder="Action type" />
                 </SelectTrigger>
                 <SelectContent>
@@ -229,73 +242,96 @@ export default function ActivityPage() {
 
             {/* Statistics */}
             <div className="mb-6 grid gap-4 sm:grid-cols-4">
-              <Card>
+              <Card className="border-2 bg-gradient-to-br from-primary/10 to-transparent">
                 <CardContent className="pt-6">
-                  <div className="text-2xl font-bold">{logs.length}</div>
-                  <p className="text-sm text-muted-foreground">Total Activities</p>
+                  <div className="flex items-center justify-between">
+                    <div>
+                      <div className="text-3xl font-bold">{logs.length}</div>
+                      <p className="text-sm font-medium text-muted-foreground">Total Activities</p>
+                    </div>
+                    <Zap className="h-8 w-8 text-primary" />
+                  </div>
                 </CardContent>
               </Card>
-              <Card>
+              <Card className="border-2 border-emerald-200 bg-gradient-to-br from-emerald-50 to-transparent dark:border-emerald-900/50 dark:from-emerald-950/20">
                 <CardContent className="pt-6">
-                  <div className="text-2xl font-bold text-green-600">
-                    {logs.filter((l) => l.action_type === "create").length}
+                  <div className="flex items-center justify-between">
+                    <div>
+                      <div className="text-3xl font-bold text-emerald-600">
+                        {logs.filter((l) => l.action_type === "create").length}
+                      </div>
+                      <p className="text-sm font-medium text-muted-foreground">Created</p>
+                    </div>
+                    <Plus className="h-8 w-8 text-emerald-600" />
                   </div>
-                  <p className="text-sm text-muted-foreground">Created</p>
                 </CardContent>
               </Card>
-              <Card>
+              <Card className="border-2 border-blue-200 bg-gradient-to-br from-blue-50 to-transparent dark:border-blue-900/50 dark:from-blue-950/20">
                 <CardContent className="pt-6">
-                  <div className="text-2xl font-bold text-blue-600">
-                    {logs.filter((l) => l.action_type === "update").length}
+                  <div className="flex items-center justify-between">
+                    <div>
+                      <div className="text-3xl font-bold text-blue-600">
+                        {logs.filter((l) => l.action_type === "update").length}
+                      </div>
+                      <p className="text-sm font-medium text-muted-foreground">Updated</p>
+                    </div>
+                    <RefreshCw className="h-8 w-8 text-blue-600" />
                   </div>
-                  <p className="text-sm text-muted-foreground">Updated</p>
                 </CardContent>
               </Card>
-              <Card>
+              <Card className="border-2 border-red-200 bg-gradient-to-br from-red-50 to-transparent dark:border-red-900/50 dark:from-red-950/20">
                 <CardContent className="pt-6">
-                  <div className="text-2xl font-bold text-red-600">
-                    {logs.filter((l) => l.action_type === "delete").length}
+                  <div className="flex items-center justify-between">
+                    <div>
+                      <div className="text-3xl font-bold text-red-600">
+                        {logs.filter((l) => l.action_type === "delete").length}
+                      </div>
+                      <p className="text-sm font-medium text-muted-foreground">Deleted</p>
+                    </div>
+                    <Trash2 className="h-8 w-8 text-red-600" />
                   </div>
-                  <p className="text-sm text-muted-foreground">Deleted</p>
                 </CardContent>
               </Card>
             </div>
 
             {/* Activity Table */}
-            <div className="rounded-md border">
+            <div className="rounded-lg border-2 overflow-hidden">
               <Table>
                 <TableHeader>
-                  <TableRow>
-                    <TableHead>Timestamp</TableHead>
-                    <TableHead>Action</TableHead>
-                    <TableHead>Entity Type</TableHead>
-                    <TableHead>Entity Name</TableHead>
-                    <TableHead>Performed By</TableHead>
+                  <TableRow className="bg-muted/50">
+                    <TableHead className="font-bold">Timestamp</TableHead>
+                    <TableHead className="font-bold">Action</TableHead>
+                    <TableHead className="font-bold">Entity Type</TableHead>
+                    <TableHead className="font-bold">Entity Name</TableHead>
+                    <TableHead className="font-bold">Performed By</TableHead>
                   </TableRow>
                 </TableHeader>
                 <TableBody>
                   {isLoading ? (
                     <TableRow>
-                      <TableCell colSpan={5} className="text-center">
-                        Loading activity logs...
+                      <TableCell colSpan={5} className="text-center py-12">
+                        <div className="flex items-center justify-center gap-2">
+                          <div className="h-4 w-4 animate-spin rounded-full border-2 border-primary border-t-transparent" />
+                          Loading activity logs...
+                        </div>
                       </TableCell>
                     </TableRow>
                   ) : filteredLogs.length === 0 ? (
                     <TableRow>
-                      <TableCell colSpan={5} className="text-center">
+                      <TableCell colSpan={5} className="text-center py-12">
                         No activity logs found
                       </TableCell>
                     </TableRow>
                   ) : (
                     filteredLogs.map((log) => (
-                      <TableRow key={log.id}>
-                        <TableCell className="text-sm text-muted-foreground">
+                      <TableRow key={log.id} className="hover:bg-primary/5">
+                        <TableCell className="text-sm font-medium text-muted-foreground">
                           {new Date(log.created_at).toLocaleString()}
                         </TableCell>
                         <TableCell>{getActionBadge(log.action_type)}</TableCell>
                         <TableCell>{getEntityBadge(log.entity_type)}</TableCell>
-                        <TableCell className="font-medium">{log.entity_name}</TableCell>
-                        <TableCell className="text-sm">{log.performed_by}</TableCell>
+                        <TableCell className="font-semibold">{log.entity_name}</TableCell>
+                        <TableCell className="text-sm font-medium">{log.performed_by}</TableCell>
                       </TableRow>
                     ))
                   )}
