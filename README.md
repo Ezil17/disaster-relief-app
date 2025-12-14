@@ -1,6 +1,6 @@
 # Disaster relief app
 
-# Deploy URL- https://v0-disaster-relief-app-silk.vercel.app/
+
 
 
 [![Deployed on Vercel](https://img.shields.io/badge/Deployed%20on-Vercel-black?style=for-the-badge&logo=vercel)](https://vercel.com/cabanzarezil17-4763s-projects/v0-disaster-relief-app)
@@ -12,7 +12,7 @@
 
 Your project is live at:
 
-**[https://vercel.com/cabanzarezil17-4763s-projects/v0-disaster-relief-app](https://vercel.com/cabanzarezil17-4763s-projects/v0-disaster-relief-app)**
+** Deploy URL- https://v0-disaster-relief-app-silk.vercel.app/
 
 
 
