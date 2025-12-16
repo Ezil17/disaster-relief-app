@@ -1,7 +1,7 @@
 # RELIEFTRACK Web-App
 
-#Description
-ReliefTrack is a web-based application designed to help the government efficiently manage and track the distribution of relief goods. It records households and beneficiaries to ensure that each family receives the correct amount of assistance. Through this system, issues such as families receiving double relief goods and shortages for others are minimized. ReliefTrack helps organizers easily monitor distributions and manage household needs in a more organized and fair way.
+# Description
++ ReliefTrack is a web-based application designed to help the government efficiently manage and track the distribution of relief goods. It records households and beneficiaries to ensure that each family receives the correct amount of assistance. Through this system, issues such as families receiving double relief goods and shortages for others are minimized. ReliefTrack helps organizers easily monitor distributions and manage household needs in a more organized and fair way.
 
 
 
