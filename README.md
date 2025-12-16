@@ -4,11 +4,12 @@
 ReliefTrack is a web-based application designed to help the government efficiently manage and track the distribution of relief goods. It records households and beneficiaries to ensure that each family receives the correct amount of assistance. Through this system, issues such as families receiving double relief goods and shortages for others are minimized. ReliefTrack helps organizers easily monitor distributions and manage household needs in a more organized and fair way.
 
 
-[![Deployed on Vercel](https://img.shields.io/badge/Deployed%20on-Vercel-black?style=for-the-badge&logo=vercel)](https://vercel.com/cabanzarezil17-4763s-projects/v0-disaster-relief-app)
+
   
 ## Deployment
-
-Your project is live at:
+[![Deployed on Vercel](https://img.shields.io/badge/Deployed%20on-Vercel-black?style=for-the-badge&logo=vercel)](https://vercel.com/cabanzarezil17-4763s-projects/v0-disaster-relief-app)
+  
+this project is live at:
 
 ### Deploy URL- https://v0-disaster-relief-app-silk.vercel.app/
 
