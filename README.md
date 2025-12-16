@@ -9,9 +9,6 @@ ReliefTrack is a web-based application designed to help the government efficient
 ## Deployment
 [![Deployed on Vercel](https://img.shields.io/badge/Deployed%20on-Vercel-black?style=for-the-badge&logo=vercel)](https://vercel.com/cabanzarezil17-4763s-projects/v0-disaster-relief-app)
   
-this project is live at:
-
-### Deploy URL- https://v0-disaster-relief-app-silk.vercel.app/
 
 # Instructions: 
 1.  Access the ReliefTrack web application using any web browser.
