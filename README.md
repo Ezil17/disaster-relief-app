@@ -21,8 +21,8 @@ Your project is live at:
 6. Visit the Activity Log to view all system activities and changes for monitoring and transparency.
 7. Ensure all data is saved and accurate before closing the web application.
 
-#Prepared by:
-*Rezil Cabanza 
-*Shyrine Balangbang
-*Sheryne Mae Gepulle 
-*Lanie Carumba 
+# Prepared by:
++ Rezil Cabanza 
++ Shyrine Balangbang
++ Sheryne Mae Gepulle 
++ Lanie Carumba
